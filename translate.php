@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 session_start();
 require 'includes/db.php';
@@ -49,36 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'source_language' => $from,
             'target_language' => $to
         ]);
-    }
-
-    echo $translatedText;
-}
-?>
-=======
-<?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $from = $_POST['from'];
-    $to = $_POST['to'];
-    $text = $_POST['text'];
-
-    $response = file_get_contents("https://libretranslate.de/translate", false, stream_context_create([
-        "http" => [
-            "method" => "POST",
-            "header" => "Content-type: application/x-www-form-urlencoded",
-            "content" => http_build_query([
-                "q" => $text,
-                "source" => $from,
-                "target" => $to,
-                "format" => "text"
-            ])
-        ]
-    ]));
-
-    $data = json_decode($response, true);
-    echo $data['translatedText'] ?? 'Translation failed.';
-}
->>>>>>> 92fdbc3ba56c4daaa578543db5d2caa2859f2978
-       ]);
     }
 
     echo $translatedText;
