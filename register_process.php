@@ -26,4 +26,3 @@ $stmt->execute([
 ]);
 
 echo "<script>alert('Registration successful! Please login.'); window.location.href='login.php';</script>";
-?>
