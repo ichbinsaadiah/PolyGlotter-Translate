@@ -4,6 +4,22 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
+
+require_once('includes/db.php');
+$user_id = $_SESSION['user_id'];
+
+$query = "SELECT * FROM translations WHERE user_id = ? ORDER BY created_at DESC LIMIT 10";
+$stmt = $conn->prepare($query);
+
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+
+$result = $stmt->get_result();
+
+$translations = [];
+while ($row = $result->fetch_assoc()) {
+    $translations[] = $row;
+}
 ?>
 
 <!DOCTYPE html>
@@ -13,18 +29,20 @@ if (!isset($_SESSION['user_id'])) {
   <title>PolyGlotter | Translate</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/theme-toggle.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body class="bg-light" id="body">
-<div class="container mt-5">
+<div class="container py-5" style="max-width: 900px;">
   <div class="d-flex justify-content-between mb-4">
     <h2>🌐 PolyGlotter</h2>
-    <div>
-      <label class="switch">
-        <input type="checkbox" id="themeSwitch">
-        <span class="slider"></span>
-      </label>
-      <a href="logout.php" class="btn btn-danger btn-sm">Logout</a>
-    </div>
+    <div class="d-flex align-items-center gap-2">
+  <label class="switch mb-0">
+    <input type="checkbox" id="themeSwitch">
+    <span class="slider"></span>
+  </label>
+  <a href="my_translations.php" class="btn btn-primary btn-sm">My Translations</a>
+  <a href="logout.php" class="btn btn-danger btn-sm">Logout</a>
+</div>
   </div>
 
   <form id="translateForm">
@@ -110,6 +128,7 @@ if (!isset($_SESSION['user_id'])) {
     <h5>Translated Text:</h5>
     <div id="result" class="p-3 border bg-white text-black rounded"></div>
   </div>
+</div>
 </div>
 
 <script src="assets/js/theme-toggle.js"></script>
