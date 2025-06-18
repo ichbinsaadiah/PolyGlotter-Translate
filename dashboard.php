@@ -52,6 +52,7 @@ while ($row = $result->fetch_assoc()) {
         <option value="en">English</option>
         <option value="ar">Arabic</option>
         <option value="az">Azerbaijani</option>
+        <option value="bn">Bengali</option>
         <option value="zh">Chinese</option>
         <option value="cs">Czech</option>
         <option value="da">Danish</option>
@@ -117,17 +118,29 @@ while ($row = $result->fetch_assoc()) {
     </div>
 
     <div class="mb-3">
-      <label for="text">Text to Translate:</label>
-      <textarea id="text" name="text" rows="4" class="form-control" required></textarea>
-    </div>
+  <label for="text">Text to Translate:</label>
+  <div class="input-group">
+    <textarea id="text" name="text" rows="4" class="form-control" required></textarea>
+    <button type="button" id="micBtn" class="btn btn-warning" title="Speak">
+      🎤
+    </button>
+  </div>
+</div>
+
 
     <button type="submit" class="btn btn-primary">Translate</button>
   </form>
 
-  <div class="mt-4">
-    <h5>Translated Text:</h5>
-    <div id="result" class="p-3 border bg-white text-black rounded"></div>
+<div class="mt-4" id="translatedSection" style="display: none;">
+  <h5>Translated Text:</h5>
+  <div id="spinner" class="d-flex align-items-center gap-2 visually-hidden mb-3">
+  <img id="earthSpinner" src="assets/img/earth.png" alt="Translating..." width="30" height="30"/>
+  <span class="fw-semibold">Translating...</span>
   </div>
+
+  <div id="result" class="p-3 border bg-white text-black rounded"></div>
+</div>
+
 </div>
 </div>
 

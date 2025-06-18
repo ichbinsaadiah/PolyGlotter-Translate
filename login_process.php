@@ -14,7 +14,6 @@ $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? OR username = ? LIMI
 $stmt->bind_param("ss", $email, $email);
 $stmt->execute();
 $result = $stmt->get_result();
-$row = $result->fetch_assoc();
 
 $user = $result->fetch_assoc();
 

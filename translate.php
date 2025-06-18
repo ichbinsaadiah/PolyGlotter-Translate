@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'includes/db.php';
+require_once 'includes/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id'] ?? null;
@@ -8,46 +8,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $to = $_POST['to'];
     $text = trim($_POST['text']);
 
-    // Translation using working RapidAPI
-    $curl = curl_init();
+    if (!$from || !$to || !$text) {
+        echo "Missing input.";
+        exit;
+    }
 
-    curl_setopt_array($curl, [
-        CURLOPT_URL => "https://translate-all-languages.p.rapidapi.com/translate?fromLang=" . urlencode($from) . "&toLang=" . urlencode($to) . "&text=" . urlencode($text),
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => [
-            "x-rapidapi-host: translate-all-languages.p.rapidapi.com",
-            "x-rapidapi-key: b8a74ea7eamshe1b8a3bf92c41e1p14cf95jsn9ecddb65e01d"
-        ],
-    ]);
+    // Temporary files for input/output
+    $tmpIn = tempnam(sys_get_temp_dir(), 'argos_in_');
+    $tmpOut = tempnam(sys_get_temp_dir(), 'argos_out_');
+    file_put_contents($tmpIn, $text);
 
-    $response = curl_exec($curl);
-    $err = curl_error($curl);
-    curl_close($curl);
+    // Python + Argos paths
+    $pythonPath = "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python310\\python.exe";
+    $argosScript = "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\argos-translate";
 
-    if ($err) {
+    // Build command with redirection
+    $cmd = "\"$pythonPath\" \"$argosScript\" --from-lang $from --to-lang $to < \"$tmpIn\" > \"$tmpOut\"";
+
+    // Ensure UTF-8 output
+    putenv("PYTHONIOENCODING=utf-8");
+
+    // Execute command
+    exec($cmd, $outputLines, $exitCode);
+    $translatedText = file_exists($tmpOut) ? trim(file_get_contents($tmpOut)) : '';
+
+    // Cleanup
+    unlink($tmpIn);
+    unlink($tmpOut);
+
+    // Fallback if something went wrong
+    if (!$translatedText || $exitCode !== 0) {
         echo "Translation failed.";
         exit;
     }
 
-    $data = json_decode($response, true);
-    $translatedText = $data['translatedText'] ?? 'Translation failed.';
-
-    // Save to DB if translation succeeded
-    if ($user_id && $translatedText !== 'Translation failed.') {
-        $stmt = $pdo->prepare("INSERT INTO translations (user_id, source_text, translated_text, source_language, target_language) 
-                               VALUES (:user_id, :source_text, :translated_text, :source_language, :target_language)");
-        $stmt->execute([
-            'user_id' => $user_id,
-            'source_text' => $text,
-            'translated_text' => $translatedText,
-            'source_language' => $from,
-            'target_language' => $to
-        ]);
+    // Save to DB if user is logged in
+    if ($user_id) {
+        $stmt = $conn->prepare("INSERT INTO translations (user_id, source_text, translated_text, source_language, target_language)
+                                VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("issss", $user_id, $text, $translatedText, $from, $to);
+        $stmt->execute();
     }
 
     echo $translatedText;
