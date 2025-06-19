@@ -7,13 +7,15 @@ PolyGlotter is a beautifully styled, responsive web app that allows users to tra
 ## 🚀 Features
 
 * 🔒 **User Authentication**: Register and login securely
-* 🌍 **Translation Support**: Translate between 25+ languages using a free API
+* 🌍 **Offline Translation** – Uses [Argos Translate](https://www.argosopentech.com/) for local translation with no API costs  
+* 🎙️ **Voice Input** – Dictate text using Web Speech API  
 * 💾 **My Translations View**: Track recent translations with search, pagination, delete, and multi-select support
 * 🌗 **Dark/Light Mode**: Seamlessly toggle based on system theme or manually
-* 🎨 **Unique Styled UI**: Rounded cards, modern layout, and Bootstrap enhancements
-* 🧠 **Session-Based History**: Translations linked to user accounts
-* 📦 **Cookie Preferences** *(coming soon)*
-* 🎙️ **Voice Input / Text-to-Speech** *(planned)*
+* 🖌️ **Custom Spinner** – Earth image-based loading animation for translation  
+* 🎨 **Modern UI** – Fully responsive layout with Bootstrap 5 + custom styles  
+* 🧠 **Session-Based History** – Translations saved per user account  
+* 🔐 **Secure Login/Register** – With MySQLi and PHP  
+* 📁 **Modular Codebase** – Easy to maintain and extend  
 
 ---
 
@@ -31,14 +33,16 @@ PolyGlotter is a beautifully styled, responsive web app that allows users to tra
 ```
 PolyGlotter/
 ├── assets/
-│   ├── css/
-│   │   └── theme-toggle.css
-│   │   └── my-translations.css
-│   └── js/
-│       └── translate.js
-│       └── my-translations.js
+│ ├── css/
+│ │ └── theme-toggle.css
+│ │ └── my-translations.css
+│ └── js/
+│ └── translate.js
+│ └── my-translations.js
+├── assets/img/
+│ └── earth.png
 ├── includes/
-│   └── db.php
+│ └── db.php
 ├── config.php
 ├── register.php / register_process.php
 ├── login.php / login_process.php
@@ -89,11 +93,12 @@ Got ideas or found an issue? Fork this project, make changes, and submit a pull 
 
 ## 📌 TODO (Future Enhancements)
 
-* [ ] Voice input and text-to-speech integration
-* [ ] Cookie preferences for theme and language
-* [ ] Download/export translation history
-* [ ] Admin panel with translation analytics
-* [ ] Email/password reset and social login
+| Feature                                     | Priority | Status        |
+| ------------------------------------------- | -------- | ------------- |
+| 🔊 Text-to-Speech (read aloud translation)  | Medium   | ❌ Not started |
+| 🍪 Cookie preferences (save theme/language) | Medium   | ❌ Not started |
+| 📤 Export or download history as CSV        | Low      | ❌ Not started    |
+| 🔐 Password reset or Google Login           | Low/Adv  | ❌ Not started    |
 
 ---
 
