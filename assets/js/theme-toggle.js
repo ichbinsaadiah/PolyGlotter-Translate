@@ -1,3 +1,26 @@
+// 🌐 Save/Restore language preferences
+document.addEventListener("DOMContentLoaded", () => {
+  const fromLang = document.getElementById("fromLang");
+  const toLang = document.getElementById("toLang");
+
+  if (fromLang && toLang) {
+    // Restore if present
+    const savedFrom = getCookie("fromLang");
+    const savedTo = getCookie("toLang");
+
+    if (savedFrom) fromLang.value = savedFrom;
+    if (savedTo) toLang.value = savedTo;
+
+    // Save on change
+    fromLang.addEventListener("change", () => {
+      document.cookie = "fromLang=" + fromLang.value + "; path=/; max-age=31536000";
+    });
+    toLang.addEventListener("change", () => {
+      document.cookie = "toLang=" + toLang.value + "; path=/; max-age=31536000";
+    });
+  }
+});
+
 const toggle = document.getElementById('themeSwitch');
 
 function setTheme(mode) {
