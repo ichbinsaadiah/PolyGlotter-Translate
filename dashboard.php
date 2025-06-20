@@ -134,11 +134,20 @@ while ($row = $result->fetch_assoc()) {
 <div class="mt-4" id="translatedSection" style="display: none;">
   <h5>Translated Text:</h5>
   <div id="spinner" class="d-flex align-items-center gap-2 visually-hidden mb-3">
-  <img id="earthSpinner" src="assets/img/earth.png" alt="Translating..." width="30" height="30"/>
-  <span class="fw-semibold">Translating...</span>
+    <img id="earthSpinner" src="assets/img/earth.png" alt="Translating..." width="36" height="36"/>
+    <span class="fw-semibold">Translating...</span>
   </div>
 
+<div id="resultWrapper" class="mt-3">
   <div id="result" class="p-3 border bg-white text-black rounded"></div>
+  <div class="d-flex justify-content-end gap-2 mt-2">
+    <button type="button" id="speakBtn" class="btn btn-light" title="Speak / Pause / Resume">
+      🔊
+    </button>
+    <button type="button" id="cancelSpeakBtn" class="btn btn-outline-danger" title="Cancel">
+      ❌
+    </button>
+  </div>
 </div>
 
 </div>
