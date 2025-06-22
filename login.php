@@ -32,6 +32,10 @@ if (isset($_SESSION['user_id'])) {
           <label>Password</label>
           <input type="password" name="password" class="form-control" required>
         </div>
+        <!-- ✅ Insert this new line just below -->
+<div class="mb-2 text-end">
+  <a href="forgot_password.php">Forgot Password?</a>
+</div>
         <button type="submit" class="btn btn-success w-100">Login</button>
         <p class="mt-3 text-center">Don’t have an account? <a href="register.php">Register</a></p>
       </form>
