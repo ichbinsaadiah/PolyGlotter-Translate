@@ -39,7 +39,6 @@ if ($row = $result->fetch_assoc()) {
 } else {
     $message = "❌ Invalid reset link.";
 }
-
 } else {
     // Check if token is valid and not expired on first visit
     if (!empty($token)) {
