@@ -22,15 +22,23 @@
     </div>
   </div>
 
-  <div class="row mb-3 g-3 align-items-center">
-    <div class="col-md-6">
-      <input type="text" class="form-control search-box" id="searchInput" placeholder="Search translations...">
-    </div>
-    <div class="col-md-6 text-md-end d-flex justify-content-md-end justify-content-start gap-2">
-      <button class="btn btn-danger btn-sm" id="deleteSelected"><i class="bi bi-trash3"></i> Delete Selected</button>
-      <button class="btn btn-secondary btn-sm" id="clearAll"><i class="bi bi-x-circle"></i> Clear All</button>
-    </div>
+<div class="row mb-3 g-3 align-items-center">
+  <div class="col-md-6">
+    <input type="text" class="form-control search-box" id="searchInput" placeholder="Search translations...">
   </div>
+  <div class="col-md-6 text-md-end d-flex justify-content-md-end justify-content-start gap-2">
+    <a href="export_csv.php" class="btn btn-success btn-sm">
+      ⬇️ Export as CSV
+    </a>
+    <button class="btn btn-danger btn-sm" id="deleteSelected">
+      <i class="bi bi-trash3"></i> Delete Selected
+    </button>
+    <button class="btn btn-secondary btn-sm" id="clearAll">
+      <i class="bi bi-x-circle"></i> Clear All
+    </button>
+  </div>
+</div>
+
 
   <div class="table-responsive">
     <table class="table table-hover table-bordered text-center align-middle rounded-4 overflow-hidden">
