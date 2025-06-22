@@ -11,6 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (savedFrom) fromLang.value = savedFrom;
     if (savedTo) toLang.value = savedTo;
 
+    // Trigger change event to update flags
+    if (savedFrom) fromLang.dispatchEvent(new Event("change"));
+    if (savedTo) toLang.dispatchEvent(new Event("change"));
+
     // Save on change
     fromLang.addEventListener("change", () => {
       document.cookie = "fromLang=" + fromLang.value + "; path=/; max-age=31536000";

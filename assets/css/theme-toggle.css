@@ -101,3 +101,14 @@ body.dark-mode {
   min-width: 2.5rem;
   font-size: 1.2rem;
 }
+
+select.form-select option {
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+#fromFlag img,
+#toFlag img {
+  vertical-align: middle;
+  margin-right: 6px;
+}
+

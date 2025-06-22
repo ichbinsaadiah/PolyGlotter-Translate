@@ -47,73 +47,76 @@ while ($row = $result->fetch_assoc()) {
 
   <form id="translateForm">
     <div class="mb-3">
-      <label for="fromLang">From:</label>
+      <label for="fromLang"  style="margin-bottom: 10px; margin-right: 5px;">From:</label>
+      <span id="fromFlag" class="me-2"></span>
       <select id="fromLang" name="from" class="form-select">
-        <option value="en">English</option>
-        <option value="ar">Arabic</option>
-        <option value="az">Azerbaijani</option>
-        <option value="bn">Bengali</option>
-        <option value="zh">Chinese</option>
-        <option value="cs">Czech</option>
-        <option value="da">Danish</option>
-        <option value="nl">Dutch</option>
-        <option value="fi">Finnish</option>
-        <option value="fr">French</option>
-        <option value="de">German</option>
-        <option value="el">Greek</option>
-        <option value="hi">Hindi</option>
-        <option value="hu">Hungarian</option>
-        <option value="id">Indonesian</option>
-        <option value="ga">Irish</option>
-        <option value="it">Italian</option>
-        <option value="ja">Japanese</option>
-        <option value="ko">Korean</option>
-        <option value="fa">Persian</option>
-        <option value="pl">Polish</option>
-        <option value="pt">Portuguese</option>
-        <option value="ru">Russian</option>
-        <option value="sk">Slovak</option>
-        <option value="es">Spanish</option>
-        <option value="sv">Swedish</option>
-        <option value="tr">Turkish</option>
-        <option value="uk">Ukrainian</option>
-        <option value="ur">Urdu</option>
-        <option value="vi">Vietnamese</option>
+          <option value="en" data-flag="gb">English</option>
+<option value="ar" data-flag="sa">Arabic</option>
+<option value="az" data-flag="az">Azerbaijani</option>
+<option value="bn" data-flag="bd">Bengali</option>
+<option value="zh" data-flag="cn">Chinese</option>
+<option value="cs" data-flag="cz">Czech</option>
+<option value="da" data-flag="dk">Danish</option>
+<option value="nl" data-flag="nl">Dutch</option>
+<option value="fi" data-flag="fi">Finnish</option>
+<option value="fr" data-flag="fr">French</option>
+<option value="de" data-flag="de">German</option>
+<option value="el" data-flag="gr">Greek</option>
+<option value="hi" data-flag="in">Hindi</option>
+<option value="hu" data-flag="hu">Hungarian</option>
+<option value="id" data-flag="id">Indonesian</option>
+<option value="ga" data-flag="ie">Irish</option>
+<option value="it" data-flag="it">Italian</option>
+<option value="ja" data-flag="jp">Japanese</option>
+<option value="ko" data-flag="kr">Korean</option>
+<option value="fa" data-flag="ir">Persian</option>
+<option value="pl" data-flag="pl">Polish</option>
+<option value="pt" data-flag="pt">Portuguese</option>
+<option value="ru" data-flag="ru">Russian</option>
+<option value="sk" data-flag="sk">Slovak</option>
+<option value="es" data-flag="es">Spanish</option>
+<option value="sv" data-flag="se">Swedish</option>
+<option value="tr" data-flag="tr">Turkish</option>
+<option value="uk" data-flag="ua">Ukrainian</option>
+<option value="ur" data-flag="pk">Urdu</option>
+<option value="vi" data-flag="vn">Vietnamese</option>
       </select>
     </div>
 
     <div class="mb-3">
-      <label for="toLang">To:</label>
+      <label for="toLang"  style="margin-bottom: 10px; margin-right: 5px;">To:</label>
+      <span id="toFlag" class="me-2"></span>
       <select id="toLang" name="to" class="form-select">
-        <option value="en">English</option>
-        <option value="ar">Arabic</option>
-        <option value="az">Azerbaijani</option>
-        <option value="zh">Chinese</option>
-        <option value="cs">Czech</option>
-        <option value="da">Danish</option>
-        <option value="nl">Dutch</option>
-        <option value="fi">Finnish</option>
-        <option value="fr">French</option>
-        <option value="de">German</option>
-        <option value="el">Greek</option>
-        <option value="hi">Hindi</option>
-        <option value="hu">Hungarian</option>
-        <option value="id">Indonesian</option>
-        <option value="ga">Irish</option>
-        <option value="it">Italian</option>
-        <option value="ja">Japanese</option>
-        <option value="ko">Korean</option>
-        <option value="fa">Persian</option>
-        <option value="pl">Polish</option>
-        <option value="pt">Portuguese</option>
-        <option value="ru">Russian</option>
-        <option value="sk">Slovak</option>
-        <option value="es">Spanish</option>
-        <option value="sv">Swedish</option>
-        <option value="tr">Turkish</option>
-        <option value="uk">Ukrainian</option>
-        <option value="ur">Urdu</option>
-        <option value="vi">Vietnamese</option>
+          <option value="en" data-flag="gb">English</option>
+<option value="ar" data-flag="sa">Arabic</option>
+<option value="az" data-flag="az">Azerbaijani</option>
+<option value="bn" data-flag="bd">Bengali</option>
+<option value="zh" data-flag="cn">Chinese</option>
+<option value="cs" data-flag="cz">Czech</option>
+<option value="da" data-flag="dk">Danish</option>
+<option value="nl" data-flag="nl">Dutch</option>
+<option value="fi" data-flag="fi">Finnish</option>
+<option value="fr" data-flag="fr">French</option>
+<option value="de" data-flag="de">German</option>
+<option value="el" data-flag="gr">Greek</option>
+<option value="hi" data-flag="in">Hindi</option>
+<option value="hu" data-flag="hu">Hungarian</option>
+<option value="id" data-flag="id">Indonesian</option>
+<option value="ga" data-flag="ie">Irish</option>
+<option value="it" data-flag="it">Italian</option>
+<option value="ja" data-flag="jp">Japanese</option>
+<option value="ko" data-flag="kr">Korean</option>
+<option value="fa" data-flag="ir">Persian</option>
+<option value="pl" data-flag="pl">Polish</option>
+<option value="pt" data-flag="pt">Portuguese</option>
+<option value="ru" data-flag="ru">Russian</option>
+<option value="sk" data-flag="sk">Slovak</option>
+<option value="es" data-flag="es">Spanish</option>
+<option value="sv" data-flag="se">Swedish</option>
+<option value="tr" data-flag="tr">Turkish</option>
+<option value="uk" data-flag="ua">Ukrainian</option>
+<option value="ur" data-flag="pk">Urdu</option>
+<option value="vi" data-flag="vn">Vietnamese</option>
       </select>
     </div>
 
@@ -153,6 +156,7 @@ while ($row = $result->fetch_assoc()) {
 </div>
 </div>
 
+<script src="assets/js/flags.js"></script>
 <script src="assets/js/theme-toggle.js"></script>
 <script src="assets/js/translate.js"></script>
 
