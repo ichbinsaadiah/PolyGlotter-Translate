@@ -1,5 +1,3 @@
-![PolyGlotter](https://github.com/ichbinsaadiah/PolyGlotter-Translate/blob/91836fb9b486a5b2a7ae6851f66c5fce369bf6cf/cover.png)
-
 # 🌐 PolyGlotter
 
 PolyGlotter is a beautifully styled, responsive web app that allows users to translate text between multiple languages using a free translation API. Featuring session-based login, translation history, and dark/light mode, it's a fast and accessible tool for multilingual communication.
