@@ -39,6 +39,14 @@ if (isset($_SESSION['user_id'])) {
         <button type="submit" class="btn btn-success w-100">Login</button>
         <p class="mt-3 text-center">Don’t have an account? <a href="register.php">Register</a></p>
       </form>
+      <!-- ✅ Google Login Button (separate section below the form) -->
+      <hr class="my-4">
+      <div class="d-grid mt-3">
+  <a href="google_login.php" class="btn btn-outline-danger d-flex align-items-center justify-content-center gap-2">
+    <img src="assets/img/g-logo.png" width="20" height="20" alt="Google Logo">
+    <span>Login with Google</span>
+  </a>
+</div>
     </div>
   </div>
 </div>
