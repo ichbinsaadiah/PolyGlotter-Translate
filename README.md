@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="cover.png" alt="PolyGlotter Cover" width="100%">
-</p>
+![PolyGlotter](https://github.com/ichbinsaadiah/PolyGlotter-Translate/blob/91836fb9b486a5b2a7ae6851f66c5fce369bf6cf/cover.png)
 
 # 🌐 PolyGlotter
 
