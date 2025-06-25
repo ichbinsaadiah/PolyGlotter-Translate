@@ -1,7 +1,6 @@
 <p align="center">
-  <img src="assets/img/logo.png" alt="PolyGlotter Cover" width="100%">
+  <img src="cover.png" alt="PolyGlotter Cover" width="100%">
 </p>
-
 
 # 🌐 PolyGlotter
 
