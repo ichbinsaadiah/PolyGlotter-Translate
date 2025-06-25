@@ -1,4 +1,7 @@
-![PolyGlotter Cover](cover.png)
+<p align="center">
+  <img src="assets/img/cover.png" alt="PolyGlotter Cover" width="100%">
+</p>
+
 
 # 🌐 PolyGlotter
 
