@@ -9,13 +9,10 @@ if (!$email || !$password) {
     die('Please fill in all fields.');
 }
 
-// Lookup user using MySQLi
+// Lookup user using PDO
 $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? OR username = ? LIMIT 1");
-$stmt->bind_param("ss", $email, $email);
-$stmt->execute();
-$result = $stmt->get_result();
-
-$user = $result->fetch_assoc();
+$stmt->execute([$email, $email]);
+$user = $stmt->fetch();
 
 if ($user && password_verify($password, $user['password'])) {
     session_start(); // required if not already started

@@ -45,9 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Save to DB if user is logged in
     if ($user_id) {
         $stmt = $conn->prepare("INSERT INTO translations (user_id, source_text, translated_text, source_language, target_language)
-                                VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("issss", $user_id, $text, $translatedText, $from, $to);
-        $stmt->execute();
+                        VALUES (?, ?, ?, ?, ?)");
+$stmt->execute([$user_id, $text, $translatedText, $from, $to]);
+
     }
 
     echo $translatedText;

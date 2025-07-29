@@ -1,1 +1,21 @@
 {"error":"Visit https://portal.libretranslate.com to get an API key"}
+
+mesh
+karke
+
+Capri - Web
+All broadcast module please remove Archive setting from additional page
+In History any content is broadcasted with & it shows "&amp;"
+
+Ritukumar
+In Quiz, the list toggle button is ON only then the "Choose Section" should be present in Additional Configuration 
+Onboarding, In Course when clicked on Attached Training there are Image file type twice
+Onboarding, In Course and in additional configuration remove Recommended Setting
+
+HOAD
+In Quiz, the list toggle button is ON only then the "Choose Section" should be present in Additional Configuration
+User should not receive OTP if the user is getting logged in with the DOB
+
+1. In Creating Template, Training Events the end date calendar is not showing up even though admin is clicking on the field multiple times
+2. In Creating Template, Session the end date calendar is not showing up even though admin is clicking on the field multiple times the calendar will be visible for the another 
+3. In Creating Template, Session 

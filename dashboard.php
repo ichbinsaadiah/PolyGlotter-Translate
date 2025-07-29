@@ -8,18 +8,13 @@ if (!isset($_SESSION['user_id'])) {
 require_once('includes/db.php');
 $user_id = $_SESSION['user_id'];
 
-$query = "SELECT * FROM translations WHERE user_id = ? ORDER BY created_at DESC LIMIT 10";
+// Convert MySQLi to PDO
+$query = "SELECT * FROM translations WHERE user_id = :user_id ORDER BY created_at DESC LIMIT 10";
 $stmt = $conn->prepare($query);
-
-$stmt->bind_param("i", $user_id);
+$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $stmt->execute();
 
-$result = $stmt->get_result();
-
-$translations = [];
-while ($row = $result->fetch_assoc()) {
-    $translations[] = $row;
-}
+$translations = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>

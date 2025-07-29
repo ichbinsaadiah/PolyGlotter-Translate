@@ -1,5 +1,4 @@
 <?php
-
 require_once 'config.php';
 
 $host = 'localhost';
@@ -8,9 +7,15 @@ $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';
 
-$conn = new mysqli($host, $user, $pass, $db);
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
-if ($conn->connect_error) {
-    die("Database connection failed: " . $conn->connect_error);
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+];
+
+try {
+    $conn = new PDO($dsn, $user, $pass, $options);
+} catch (PDOException $e) {
+    die('Database connection failed: ' . $e->getMessage());
 }
-?>

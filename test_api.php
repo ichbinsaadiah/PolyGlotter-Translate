@@ -1,4 +1,5 @@
 <?php
+require_once 'config.php';
 
 $originalText = "Hello world, this is a test.";
 
@@ -14,7 +15,7 @@ curl_setopt_array($curl, [
 	CURLOPT_CUSTOMREQUEST => "GET",
 	CURLOPT_HTTPHEADER => [
 		"x-rapidapi-host: translate-all-languages.p.rapidapi.com",
-		"x-rapidapi-key: " . "b8a74ea7eamshe1b8a3bf92c41e1p14cf95jsn9ecddb65e01d"
+		"x-rapidapi-key: " . RAPIDAPI_KEY
 	],
 ]);
 

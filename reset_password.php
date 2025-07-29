@@ -10,50 +10,44 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $token = $_POST['token'];
     $newPassword = $_POST['password'];
 
-    // Get email for token
     $stmt = $conn->prepare("SELECT email, expires_at FROM password_resets WHERE token = ?");
-$stmt->bind_param("s", $token);
-$stmt->execute();
-$result = $stmt->get_result();
+    $stmt->execute([$token]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($row = $result->fetch_assoc()) {
-    $email = $row['email'];
-    $expires = strtotime($row['expires_at']);
+    if ($row) {
+        $email = $row['email'];
+        $expires = strtotime($row['expires_at']);
 
-    if ($expires > time()) {
-        // Update user password
-        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-        $update = $conn->prepare("UPDATE users SET password = ? WHERE email = ?");
-        $update->bind_param("ss", $hashedPassword, $email);
-        $update->execute();
+        if ($expires > time()) {
+            // Update password
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+            $update = $conn->prepare("UPDATE users SET password = ? WHERE email = ?");
+            $update->execute([$hashedPassword, $email]);
 
-        // Delete token
-        $delete = $conn->prepare("DELETE FROM password_resets WHERE token = ?");
-        $delete->bind_param("s", $token);
-        $delete->execute();
+            // Delete token
+            $delete = $conn->prepare("DELETE FROM password_resets WHERE token = ?");
+            $delete->execute([$token]);
 
-        $message = "✅ Your password has been reset. <a href='login.php'>Login now</a>";
+            $message = "Your password has been reset. <a href='login.php'>Login now</a>";
+        } else {
+            $message = "This reset link has expired.";
+        }
     } else {
-        $message = "❌ This reset link has expired.";
+        $message = "Invalid reset link.";
     }
 } else {
-    $message = "❌ Invalid reset link.";
-}
-} else {
-    // Check if token is valid and not expired on first visit
+    // On GET request, validate token
     if (!empty($token)) {
         $stmt = $conn->prepare("SELECT expires_at FROM password_resets WHERE token = ?");
-        $stmt->bind_param("s", $token);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        
-        if ($row = $result->fetch_assoc()) {
+        $stmt->execute([$token]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
             $expires = strtotime($row['expires_at']);
             $valid = $expires > time();
         }
     }
 }
-
 ?>
 
 <!DOCTYPE html>

@@ -8,24 +8,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);
 
     // Check if user exists
-    $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
+    $stmt = $conn->prepare("SELECT id FROM users WHERE email = :email");
+    $stmt->bindParam(':email', $email);
     $stmt->execute();
-    $stmt->store_result();
 
-    if ($stmt->num_rows == 1) {
+    if ($stmt->rowCount() == 1) {
         // Generate secure token
         $token = bin2hex(random_bytes(32));
         $expires = date("Y-m-d H:i:s", time() + 3600); // 1 hour from now
 
-        // Store token and expiry in a new table (we'll create it)
-        $stmt2 = $conn->prepare("INSERT INTO password_resets (email, token, expires_at) VALUES (?, ?, ?)");
-        $stmt2->bind_param("sss", $email, $token, $expires);
+        // Store token and expiry in password_resets table
+        $stmt2 = $conn->prepare("INSERT INTO password_resets (email, token, expires_at) VALUES (:email, :token, :expires)");
+        $stmt2->bindParam(':email', $email);
+        $stmt2->bindParam(':token', $token);
+        $stmt2->bindParam(':expires', $expires);
         $stmt2->execute();
 
-        // Send email (replace with real mail function later)
+        // Reset link (for dev/testing, display on page)
         $resetLink = "http://localhost/polyglotter/reset_password.php?token=$token";
-        // In dev, just display the link instead of sending email
         $message = "Reset link (valid for 1 hour): <br><a href='$resetLink'>$resetLink</a>";
     } else {
         $message = "No account found with that email.";

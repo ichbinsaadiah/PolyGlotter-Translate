@@ -27,7 +27,7 @@ PolyGlotter is a beautifully styled, responsive web app that allows users to tra
 ## 🛠️ Tech Stack
 
 * **Frontend**: HTML5, Bootstrap 5, JavaScript (AJAX)
-* **Backend**: PHP (MySQLi)
+* **Backend**: PHP (PDO, MySQL)
 * **Database**: MySQL (`language_platform`)
 * **Translation Engine**: Argos Translate (offline model-based)
 * **OAuth**: Google OAuth 2.0 via Google API SDK
@@ -77,8 +77,6 @@ PolyGlotter/
 ---
 
 ## 📦 Database Schema
-
-### `users`
 
 ### `users`
 | id | username | email | password | created_at |

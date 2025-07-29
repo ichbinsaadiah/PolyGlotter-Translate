@@ -1,44 +1,47 @@
 <?php
 session_start();
+use Google\Service\Oauth2;
 require_once __DIR__ . '/google_config.php'; // Configures $client
-require_once __DIR__ . '/includes/db.php';   // DB connection
+require_once __DIR__ . '/includes/db.php';   // PDO DB connection
 
 if (isset($_GET['code'])) {
     $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
 
-    if (!isset($token['error'])) {
-        $client->setAccessToken($token['access_token']);
-
-        $oauth = new Google_Service_Oauth2($client);
-        $googleUser = $oauth->userinfo->get();
-
-        $email = $googleUser->email;
-        $name = $googleUser->name;
-
-        // Check if user already exists
-        $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $stmt->store_result();
-
-        if ($stmt->num_rows === 1) {
-            $stmt->bind_result($user_id);
-            $stmt->fetch();
-        } else {
-            // Insert new user (you can customize further if needed)
-            $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, '')");
-            $stmt->bind_param("ss", $name, $email);
-            $stmt->execute();
-            $user_id = $stmt->insert_id;
-        }
-
-        // Login
-        $_SESSION['user_id'] = $user_id;
-        header('Location: dashboard.php');
+    // Proper error check
+    if ($token === null || isset($token['error'])) {
+        echo "<p>Error fetching token: " . htmlspecialchars($token['error'] ?? 'Unknown error') . "</p>";
         exit;
-    } else {
-        echo "<p>❌ Error fetching token: " . htmlspecialchars($token['error']) . "</p>";
     }
+
+    $client->setAccessToken($token['access_token']);
+    $_SESSION['access_token'] = $client->getAccessToken();
+
+    $oauth = new Oauth2($client);
+    $googleUser = $oauth->userinfo->get();
+
+    $email = $googleUser->email;
+    $name = $googleUser->name;
+
+    // Check if user already exists
+    $stmt = $conn->prepare("SELECT id FROM users WHERE email = :email");
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+
+    if ($stmt->rowCount() === 1) {
+        $user_id = $stmt->fetchColumn();
+    } else {
+        // Insert new user
+        $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, '')");
+        $stmt->bindParam(':username', $name);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $user_id = $conn->lastInsertId();
+    }
+
+    // Login
+    $_SESSION['user_id'] = $user_id;
+    header('Location: dashboard.php');
+    exit;
 } else {
-    echo "<p>❌ Authorization code not provided.</p>";
+    echo "<p>Authorization code not provided.</p>";
 }
