@@ -7,7 +7,6 @@ PolyGlotter is a beautifully styled, responsive web app that allows users to tra
 ## 🚀 Features
 
 * 🔒 **User Authentication**: Register and login securely
-* 🔑 **Google Login (OAuth2)** – Sign in quickly using your Google account
 * 🌍 **Offline Translation** – Uses [Argos Translate](https://www.argosopentech.com/) for local translation with no API costs
 * 🔊 **Text-to-Speech** – Read aloud translated text with pause/resume/cancel
 * 🎙️ **Voice Input** – Dictate text using Web Speech API
@@ -30,7 +29,6 @@ PolyGlotter is a beautifully styled, responsive web app that allows users to tra
 * **Backend**: PHP (PDO, MySQL)
 * **Database**: MySQL (`language_platform`)
 * **Translation Engine**: Argos Translate (offline model-based)
-* **OAuth**: Google OAuth 2.0 via Google API SDK
 * **Offline**: Python + Argos Translate (via CLI and installed models)
 * **Flags:** flag-icons.min.css + local SVGs
 
@@ -94,19 +92,18 @@ PolyGlotter/
 
 ## 🧪 Setup Instructions
 
-1. Clone the repo:
-   git clone https://github.com/your-username/polyglotter.git
+1. Unzip the downloaded `.zip` file
 
 2. Import `language_platform.sql` into MySQL (structure only)
 
-3. Move the project into `htdocs` if using XAMPP
+3. Move the project folder into `htdocs` (if using XAMPP)
 
-4. Edit `config.php` to match your MySQL credentials
+4. Edit `config.php` with your MySQL credentials
 
-5. Install PHP dependencies:
+5. Run this in the project root to install PHP dependencies:
    composer install
 
-6. (Optional) Install Argos Translate and language models:
+6. (Optional) Install Argos Translate and offline language models:
    pip install argostranslate
    argos-translate-cli --install translate-en_es
    argos-translate-cli --install translate-ar_en
